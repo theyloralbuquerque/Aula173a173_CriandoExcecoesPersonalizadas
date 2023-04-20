@@ -55,6 +55,8 @@ public class Reserva {
 	    if (!checkOut.after(checkIn)) {
 	    	return "Erro na  atualização da reserva: a data de check-out deve ser posterior à data de check-in.";
 	    }
+	    this.checkIn = checkIn;
+	    this.checkOut = checkOut;
 	    return null; // Irá retornar null apenas se nenhum dos ifs forem executados.
     }
 

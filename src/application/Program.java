@@ -19,9 +19,9 @@ public class Program {
 		System.out.print("Número do quarto: ");
 	    Integer numeroDoQuarto = sc.nextInt();
 	    System.out.print("Data de check-in (dd/MM/yyyy): ");
-	    Date checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
+	    Date checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
 	    System.out.print("Data de check-out (dd/MM/yyyy): ");
-	    Date checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
+	    Date checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
 	   
 	    Date agora = new Date();
 	    // Se checkIn for depois de agora OU checkOut depois de agora.
@@ -39,9 +39,9 @@ public class Program {
 	    	System.out.println();
 		    System.out.println("Digite os dados para atualizar a reserva:");
 		    System.out.print("Data de check-in (dd/MM/yyyy): ");
-		    checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
+		    checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
 		    System.out.print("Data de check-out (dd/MM/yyyy): ");
-		    checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
+		    checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
 		    
 		    String erro = reserva.atualizacaoDasDatas(checkIn, checkOut);
 		    if (erro != null) {
