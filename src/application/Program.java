@@ -13,7 +13,7 @@ public class Program {
 	public static void main(String[] args) throws ParseException {
 		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
-		// Variável sdf do tipo SimpleDateForma para tratar as datas em um formato específico.
+		// Variável sdf do tipo SimpleDateFormat para tratar as datas em um formato específico.
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		System.out.print("Número do quarto: ");
@@ -24,7 +24,8 @@ public class Program {
 	    Date checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
 	   
 	    Date agora = new Date();
-	    if (checkIn.before(agora) || checkOut.before(agora)) {
+	    // Se checkIn for depois de agora OU checkOut depois de agora.
+	    if (checkIn.before(agora) || checkOut.before(agora)) { 
 	    	System.out.println("Erro na reserva: As datas da reserva devem ser datas futuras.");	
 	    	
 	    } else if (!checkOut.after(checkIn)) { // Se checkOut não for depois de checkIn.
@@ -42,19 +43,14 @@ public class Program {
 		    System.out.print("Data de check-out (dd/MM/yyyy): ");
 		    checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sfd e armazenado em checkIn.
 		    
-		    if (checkIn.before(agora) || checkOut.before(agora)) {
-		    	System.out.println("Erro na reserva: As datas de atualização da reserva devem ser datas futuras.");	
-		    	
-		    // Senão, se checkOut não for depois de checkIn.
-		    } else if (!checkOut.after(checkIn)) {
-		    	System.out.println("Erro na reserva: a data de check-out deve ser posterior à data de check-in.");
+		    String erro = reserva.atualizacaoDasDatas(checkIn, checkOut);
+		    if (erro != null) {
+		    	System.out.println(erro);
 		    }
 		    else {
-		    	reserva.atualizacaoDasDatas(checkIn, checkOut);
 		    	System.out.println("Reserva : " + reserva);
 		    }
 	    }		
 		sc.close();
 	}
-
 }
