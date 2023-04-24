@@ -3,36 +3,30 @@ package application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reserva;
+import model.exception.DomainException;
 
 public class Program {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Locale.setDefault(Locale.US);
 		// Variável sdf do tipo SimpleDateFormat para tratar as datas em um formato específico.
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		System.out.print("Número do quarto: ");
-	    Integer numeroDoQuarto = sc.nextInt();
-	    System.out.print("Data de check-in (dd/MM/yyyy): ");
-	    Date checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
-	    System.out.print("Data de check-out (dd/MM/yyyy): ");
-	    Date checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
-	   
-	    Date agora = new Date();
-	    // Se checkIn for depois de agora OU checkOut depois de agora.
-	    if (checkIn.before(agora) || checkOut.before(agora)) { 
-	    	System.out.println("Erro na reserva: As datas da reserva devem ser datas futuras.");	
-	    	
-	    } else if (!checkOut.after(checkIn)) { // Se checkOut não for depois de checkIn.
-	    	System.out.println("Erro na reserva: a data de check-out deve ser posterior à data de check-in.");
-	    }
-	    // Senão, instanciar a classe Reserva.
-	    else {
+		try {
+			System.out.print("Número do quarto: ");
+		    Integer numeroDoQuarto = sc.nextInt();
+		    System.out.print("Data de check-in (dd/MM/yyyy): ");
+		    Date checkIn = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
+		    System.out.print("Data de check-out (dd/MM/yyyy): ");
+		    Date checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
+		   
+	
 	    	Reserva reserva = new Reserva(numeroDoQuarto, checkIn, checkOut);
 	    	System.out.println("Reserva : " + reserva);
 	    	
@@ -43,14 +37,19 @@ public class Program {
 		    System.out.print("Data de check-out (dd/MM/yyyy): ");
 		    checkOut = sdf.parse(sc.next()); // o que o usuário digitar será convertido em sdf e armazenado em checkIn.
 		    
-		    String erro = reserva.atualizacaoDasDatas(checkIn, checkOut);
-		    if (erro != null) {
-		    	System.out.println(erro);
-		    }
-		    else {
-		    	System.out.println("Reserva : " + reserva);
-		    }
-	    }		
+		    reserva.atualizacaoDasDatas(checkIn, checkOut);
+		    System.out.println("Reserva : " + reserva);
+		}
+		catch (ParseException e) {
+			System.out.println("A data digitada é inválida!");
+		}
+		catch (DomainException e) {
+			System.out.println("Erro na reserva: " + e.getMessage());
+		}
+		/*catch (RuntimeException e) {
+			System.out.println("Erro inesperado.");
+		}
+*/
 		sc.close();
 	}
 }
