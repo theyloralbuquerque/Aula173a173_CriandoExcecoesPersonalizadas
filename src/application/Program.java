@@ -3,7 +3,6 @@ package application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -40,16 +39,16 @@ public class Program {
 		    reserva.atualizacaoDasDatas(checkIn, checkOut);
 		    System.out.println("Reserva : " + reserva);
 		}
-		catch (ParseException e) {
+		catch (ParseException e) { // catch que trata exceções do tipo ParseException (input da data).
 			System.out.println("A data digitada é inválida!");
 		}
-		catch (DomainException e) {
+		catch (DomainException e) { // catch que trata exceções do tipo DomainException (personalizada).
 			System.out.println("Erro na reserva: " + e.getMessage());
 		}
-		/*catch (RuntimeException e) {
+		catch (RuntimeException e) { // catch que trata exceções do tipo RuntimeException.
 			System.out.println("Erro inesperado.");
 		}
-*/
+
 		sc.close();
 	}
 }

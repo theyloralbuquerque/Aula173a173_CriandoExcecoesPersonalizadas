@@ -17,8 +17,10 @@ public class Reserva {
     }
 
     public Reserva(Integer numeroDoQuarto, Date checkIn, Date checkOut) {
-	    if (!checkOut.after(checkIn)) {
-	    	throw new DomainException("A data de check-out deve ser posterior à data de check-in.");
+	    if (!checkOut.after(checkIn)) { /* Condicional que verifica desde a primeira interação com usuário se a data de checkOut tem valor
+	    								 	anterior a data de checkIn.
+	    								 */ 
+	    	throw new DomainException("A data de check-out deve ser posterior à data de check-in."); // Lançamento de exceção DomainException caso o if seja V. 
 	    }
         this.numeroDoQuarto = numeroDoQuarto;
         this.checkIn = checkIn;
